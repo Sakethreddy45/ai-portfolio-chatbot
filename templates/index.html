@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ name }} — {{ title }}</title>
+    <meta name="description" content="Chat with {{ name }}'s AI to learn about their skills and experience." />
+    <link rel="stylesheet" href="/static/css/main.css" />
+</head>
+<body data-persona="{{ name }}">
+
+    <div class="bg-grid"></div>
+    <div class="bg-glow"></div>
+
+    <div class="shell">
+        <header class="hdr">
+            <div class="hdr-row">
+                <div class="avatar">
+                    {% set parts = name.split() %}
+                    {{ parts[0][0] }}{{ parts[-1][0] if parts|length > 1 else '' }}
+                </div>
+                <div class="hdr-info">
+                    <h1>{{ name }}</h1>
+                    
+                </div>
+                <div class="status">
+                    <span class="dot"></span> Open to work
+                </div>
+            </div>
+            <div class="sep"></div>
+        </header>
+
+        <main class="msgs" id="msgs"></main>
+
+        <div class="starters" id="starters">
+            <button class="pill">What's your AI experience?</button>
+            <button class="pill">Tell me about your projects</button>
+            <button class="pill">What tech do you work with?</button>
+            <button class="pill">Why should we hire you?</button>
+        </div>
+
+        <footer class="input-section">
+            <div class="input-row">
+                <textarea id="inp" rows="1" placeholder="Ask me anything about {{ name }}..."></textarea>
+                <button id="send" disabled>
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="2.5"
+                         stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="22" y1="2" x2="11" y2="13"/>
+                        <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                    </svg>
+                </button>
+            </div>
+            
+        </footer>
+    </div>
+
+    <script src="/static/js/chat.js"></script>
+</body>
+</html>

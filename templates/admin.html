@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin — {{ name }}</title>
+    <link rel="stylesheet" href="/static/css/admin.css" />
+</head>
+<body>
+
+<div class="top-bar">
+    <div>
+        <h1>{{ name }} — Admin</h1>
+        <span style="color:var(--muted); font-size:13px;">Manage your knowledge base</span>
+    </div>
+    <a href="/">← Back to chat</a>
+</div>
+
+<!-- upload documents -->
+<div class="section">
+    <h2>Upload Documents</h2>
+    <p style="color:var(--muted); font-size:13px; margin-bottom:10px;">
+        Drop your resume, project docs, or any text file. The system chunks and indexes them automatically.
+    </p>
+    <form method="POST" action="/admin/upload" enctype="multipart/form-data">
+        <div class="upload-area">
+            <input type="file" name="file" accept=".pdf,.txt,.md" required />
+            <p style="color:var(--muted); font-size:12px;">Supports PDF, TXT, MD</p>
+        </div>
+        <button type="submit" class="btn btn-primary" style="margin-top:8px;">Upload & Index</button>
+    </form>
+
+    {% if documents %}
+    <table style="margin-top:14px;">
+        <tr><th>File</th><th>Chunks</th><th>Uploaded</th><th></th></tr>
+        {% for doc in documents %}
+        <tr>
+            <td>{{ doc.filename }}</td>
+            <td>{{ doc.chunk_count }}</td>
+            <td style="color:var(--muted);">{{ doc.created_at }}</td>
+            <td>
+                <form method="POST" action="/admin/doc/{{ doc.id }}/delete" style="display:inline;">
+                    <button class="btn btn-danger btn-sm">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+</div>
+
+<!-- manual Q&A -->
+<div class="section">
+    <h2>Add Q&A Entry</h2>
+    <p style="color:var(--muted); font-size:13px; margin-bottom:10px;">
+        For specific questions you want to nail — like "Why should we hire you?"
+    </p>
+    <form method="POST" action="/admin/entry/add">
+        <div class="form-row">
+            <select name="category">
+                <option value="experience">Experience</option>
+                <option value="skills">Skills</option>
+                <option value="projects">Projects</option>
+                <option value="education">Education</option>
+                <option value="personal">Personal</option>
+                <option value="other">Other</option>
+            </select>
+            <input type="text" name="question" placeholder="Question" required />
+        </div>
+        <textarea name="answer" placeholder="Answer" required></textarea>
+        <button type="submit" class="btn btn-primary">Add Entry</button>
+    </form>
+
+    {% if entries %}
+    <table style="margin-top:14px;">
+        <tr><th>Category</th><th>Question</th><th>Answer</th><th></th></tr>
+        {% for e in entries %}
+        <tr>
+            <td><span style="color:var(--accent);">{{ e.category }}</span></td>
+            <td>{{ e.question }}</td>
+            <td style="max-width:300px;">{{ e.answer[:120] }}{% if e.answer|length > 120 %}...{% endif %}</td>
+            <td>
+                <form method="POST" action="/admin/entry/{{ e.id }}/delete" style="display:inline;">
+                    <button class="btn btn-danger btn-sm">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <p class="empty">No entries yet</p>
+    {% endif %}
+</div>
+
+<!-- unanswered questions -->
+<div class="section">
+    <h2>Unanswered Questions</h2>
+    <p style="color:var(--muted); font-size:13px; margin-bottom:10px;">
+        Questions the bot couldn't answer — add these to your knowledge base.
+    </p>
+    {% if unanswered %}
+    <table>
+        <tr><th>Question</th><th>When</th></tr>
+        {% for q in unanswered %}
+        <tr>
+            <td>{{ q.question }}</td>
+            <td style="color:var(--muted);">{{ q.created_at }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <p class="empty">No unanswered questions yet — nice</p>
+    {% endif %}
+</div>
+
+<!-- leads -->
+<div class="section">
+    <h2>Leads</h2>
+    {% if leads %}
+    <table>
+        <tr><th>Email</th><th>Name</th><th>Notes</th><th>When</th></tr>
+        {% for l in leads %}
+        <tr>
+            <td>{{ l.email }}</td>
+            <td>{{ l.name or '—' }}</td>
+            <td>{{ l.notes or '—' }}</td>
+            <td style="color:var(--muted);">{{ l.created_at }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <p class="empty">No leads yet</p>
+    {% endif %}
+</div>
+
+<!-- recent chats -->
+<div class="section">
+    <h2>Recent Conversations</h2>
+    {% if chats %}
+    <table>
+        <tr><th>Visitor</th><th>Bot</th><th>When</th></tr>
+        {% for c in chats %}
+        <tr>
+            <td>{{ c.visitor_msg[:80] }}{% if c.visitor_msg|length > 80 %}...{% endif %}</td>
+            <td>{{ c.bot_reply[:80] }}{% if c.bot_reply|length > 80 %}...{% endif %}</td>
+            <td style="color:var(--muted); white-space:nowrap;">{{ c.created_at }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <p class="empty">No conversations yet</p>
+    {% endif %}
+</div>
+
+<!-- rebuild index -->
+<div class="section">
+    <h2>Maintenance</h2>
+    <form method="POST" action="/admin/rebuild-index">
+        <button class="btn btn-primary">Rebuild Vector Index</button>
+    </form>
+    <p style="color:var(--muted); font-size:12px; margin-top:6px;">
+        Re-embeds all Q&A entries. Use after bulk edits. Uploaded documents are not affected.
+    </p>
+</div>
+
+</body>
+</html>
