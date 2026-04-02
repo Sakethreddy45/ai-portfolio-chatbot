@@ -19,7 +19,7 @@ def _check_auth(request: Request):
 
 @router.get("/login", response_class=HTMLResponse)
 async def login_page(request: Request):
-    return templates.TemplateResponse("login.html", {"request": request})
+    return templates.TemplateResponse(request=request, name="login.html", context={})
 
 
 @router.post("/login")
@@ -36,18 +36,21 @@ async def login(password: str = Form(...)):
 @router.get("", response_class=HTMLResponse)
 async def dashboard(request: Request):
     _check_auth(request)
-    return templates.TemplateResponse("admin.html", {
-        "request": request,
-        "name": PERSONA_NAME,
-        "entries": store.get_all_entries(),
-        "documents": store.get_documents(),
-        "leads": store.get_leads(),
-        "unanswered": store.get_unanswered(),
-        "chats": store.get_chat_logs(limit=30),
-    })
+    return templates.TemplateResponse(
+        request=request,
+        name="admin.html",
+        context={
+            "name": PERSONA_NAME,
+            "entries": store.get_all_entries(),
+            "documents": store.get_documents(),
+            "leads": store.get_leads(),
+            "unanswered": store.get_unanswered(),
+            "chats": store.get_chat_logs(limit=30),
+        },
+    )
 
 
-# ── manual Q&A entry ────────────────────────────────────────
+
 
 @router.post("/entry/add")
 async def add(request: Request, category: str = Form(...), question: str = Form(...), answer: str = Form(...)):
