@@ -38,8 +38,8 @@ app.include_router(admin_router)
 
 @app.get("/", response_class=HTMLResponse)
 async def index(request: Request):
-    return templates.TemplateResponse("index.html", {
-        "request": request,
-        "name": PERSONA_NAME,
-        "title": PERSONA_TITLE,
-    })
+    return templates.TemplateResponse(
+        request=request,
+        name="index.html",
+        context={"name": PERSONA_NAME, "title": PERSONA_TITLE},
+    )
