@@ -1,9 +1,14 @@
-fastapi==0.115.0
-uvicorn[standard]==0.30.6
-openai==1.51.0
-chromadb==0.5.23
-pypdf==4.3.1
-python-dotenv==1.0.1
-requests==2.32.3
-jinja2==3.1.4
-python-multipart==0.0.12
+notepad requirements.txt
+```
+
+Replace everything with:
+```
+fastapi
+uvicorn[standard]
+openai
+chromadb
+pypdf
+python-dotenv
+requests
+jinja2
+python-multipart
