@@ -1,0 +1,89 @@
+Saketh Reddy Voodem
+Email: voodemsaketh45@gmail.com
+Location: Morgantown, WV
+LinkedIn: linkedin.com/in/saketh-reddy-voodem-ab86ba266
+
+EDUCATION
+
+M.S. Computer Science, University at Albany-SUNY, Albany, NY. Jan 2023 to Dec 2024.
+B.E. Computer Science and Engineering, Chaitanya Bharathi Institute of Technology, Hyderabad, India. Jul 2018 to May 2022.
+
+CERTIFICATIONS
+
+Introduction to Model Context Protocol, issued by Anthropic, March 2026. Credential ID xhbnm848aj7u. Covers Model Context Protocol (MCP) and AI Integration.
+
+Certificate of Completion: AI Fluency Framework and Foundations, issued by Anthropic, March 2026. Credential ID 5dkb8t88z82j.
+
+RESEARCH EXPERIENCE
+
+Research Assistant at University at Albany, SUNY School of Social Welfare, Albany, NY. Aug 2024 to Sept 2025.
+
+Worked on applied research that uses AI and NLP to understand housing stability, eviction and public-sector communication. A big part of the role was collecting and preparing large public datasets, including scraping government and policy websites and analyzing discussions from online forums.
+
+Used large language models and machine learning as part of research pipelines to organize and analyze unstructured text at scale. This included prompt-structured extraction and summarization, embedding-based retrieval, and retrieval-augmented generation to keep model outputs grounded in source material. Also spent time checking model behavior and output quality to make sure results were consistent, interpretable and useful.
+
+Worked with different models across both frontier and open-source ecosystems and explored lightweight fine-tuning approaches for task-specific research needs. Beyond modeling, focused heavily on data quality, validation, and visualization, working closely with researchers to turn complex analyses into clear summaries, dashboards, and policy-relevant insights.
+
+Built an end-to-end NLP/ML measurement pipeline to quantify landlord discourse from large-scale unstructured data. Scraped, cleaned, and structured a Reddit corpus. Designed a multi-stage LLM classification framework using GPT-4, Llama, custom prompt schemas, and structured output parsing. Achieved 98% precision in location tagging and 90% accuracy in topic classification.
+
+Applied unsupervised ML on topic embeddings to identify thematic groupings. Conducted state-level frequency, temporal, and comparative analysis to surface regional variation in housing concerns. Presented findings at SSWR 2026 Annual Conference.
+
+Constructed a national-scale structured dataset from scratch by programmatically identifying official URLs for all U.S. counties, cities, and towns. Built a Selenium-based framework to inject policy-relevant keywords and capture results as MHTML for reproducible extraction.
+
+Designed a retrieval-augmented analysis workflow using semantic reranking to filter web content by relevance before passing to LLM for structured summarization. Performed comparative analysis across jurisdictions to identify patterns in policy language and enforcement approaches.
+
+Built a geospatial image pipeline using Google Street View API. Fine-tuned pretrained CNNs (ResNet-50) to classify urban features. Joined outputs with socio-economic data via multivariate and spatial regression to quantify eviction risk predictors. Visualized results through interactive Tableau dashboards.
+
+Led data collection, processing, and analysis across three concurrent studies on U.S. housing instability, integrating multi-modal data including social media, government websites, satellite imagery, census and administrative records.
+
+PROFESSIONAL EXPERIENCE
+
+Data Technician at West Virginia University, Morgantown, WV. Sept 2025 to Present.
+
+Designs and maintains automated Python and SQL pipelines to extract, transform, and reconcile records across multiple institutional data systems. Enforces consistency through validation frameworks, deduplication logic, and cross-system integrity checks.
+
+Conducts quantitative analysis using Python and Stata on circulation patterns, usage distributions, and metadata quality to detect operational trends, flag anomalies, and generate insights that drive strategic planning and resource allocation decisions.
+
+Develops ad-hoc analytical solutions through a ticketing workflow. Scopes data requirements, queries across heterogeneous source systems and delivers results as structured datasets, statistical summaries, or custom dashboards for institutional stakeholders.
+
+Graduate Assistant at University at Albany, SUNY, Albany, NY. Aug 2023 to Dec 2024.
+
+Focused on improving data quality and reporting for collection and metadata analytics. Worked with structured and semi-structured data from library systems using Python, R, and SQL to clean, standardize, and analyze datasets used in institutional reports.
+
+Designed and automated Tableau and Power BI dashboards to visualize usage trends and collection growth, helping staff make data-informed decisions. Worked alongside librarians and IT teams to document workflows, improve metadata accuracy, and ensure that reporting pipelines ran smoothly.
+
+Built automated ETL pipelines to ingest, normalize, and validate records from heterogeneous sources including CSV, XML, JSON, and SQL. Improved metadata consistency by 25%. Collaborated on database optimization and query refactoring, reducing execution time by 60%. Documented all data transformations and reporting workflows for reproducibility.
+
+Data Science Intern at Verzeo, Hyderabad, India. Aug 2020 to Dec 2020.
+
+Worked on building end-to-end machine learning pipelines and deploying models for real-time analytics. Developed a spam detection system for social media data, applying classification algorithms such as Naive Bayes and SVM to improve model accuracy and reduce false positives.
+
+Automated data collection and preprocessing workflows using Python, handling over half a million records efficiently. Model outputs were integrated into RESTful microservices allowing real-time predictions and performance monitoring. Created dashboards to visualize model metrics and system performance, improving transparency and model evaluation.
+
+Reduced false positives by 15% and improved precision by 18%. Deployed models as Flask REST API microservices on IBM Cloud with sub-100ms latency and batch processing improving throughput by 20%.
+
+PROJECTS
+
+Project: AI Portfolio Chatbot
+
+Built a chatbot that works as an interactive portfolio where visitors can ask anything about Saketh's background and get real answers. Under the hood it runs a RAG pipeline. Resume and project docs get chunked and embedded using OpenAI's text-embedding-3-small model then stored in ChromaDB. When someone asks a question the system embeds their query finds the closest matching chunks via cosine similarity and feeds that context into GPT-4o-mini to generate a response. The bot only talks about things Saketh has actually done. The backend is FastAPI with SQLite tracking knowledge entries, conversation logs, visitor leads, and unanswered questions. There is a password-protected admin panel for uploading new documents, adding specific Q&A pairs, viewing what people are asking, and seeing who left their email. OpenAI function calling handles the lead capture and logs questions the bot could not answer. Pushover notifications send real-time alerts when someone drops their email or asks something the bot does not know. Deployed on Hugging Face Spaces. Tech stack includes Python, FastAPI, OpenAI API, ChromaDB, SQLite, RAG, Prompt Engineering, OpenAI Function Calling, HTML, CSS, JavaScript, Docker, Hugging Face.
+
+Project: Using AI to Explore What Landlords Care About in Promoting Housing Stability
+
+Collected and analyzed millions of Reddit posts from landlord and tenant forums using the Pushshift API and custom Python scripts. Built an NLP pipeline with Large Language Models and Sentence-BERT embeddings to classify, cluster, and summarize discussion topics. Applied hierarchical and unsupervised clustering to group themes uncovering key patterns around rent increases, repairs, lease disputes, and eviction issues. Achieved 98% accuracy in geographic tagging and 90% precision in topic identification. Visualized results in Tableau dashboards highlighting regional housing trends and common landlord-tenant concerns across the U.S.
+
+Project: Automated Analysis of Local Government Websites Using AI
+
+Engineered a scalable AI data pipeline to collect, process, and analyze public data from thousands of official U.S. city, county, and borough websites. Utilized the Google Custom Search API to identify and validate official domains followed by Selenium automation for dynamic web extraction. Applied Large Language Models and NLP techniques to classify, summarize, and structure extracted text transforming unstructured web content into a clean analyzable dataset. Developed ETL workflows and Tableau dashboards to visualize online policy patterns and transparency metrics across regions. Improved data completeness and consistency replacing manual crowdsourced scanning with a fully automated reproducible system.
+
+Project: Predictive Modeling and Visualization of Eviction Risk Patterns in U.S. Neighborhoods
+
+Analyzed Google Street View images to study neighborhood characteristics linked to housing instability. Built Convolutional Neural Network models in Python to extract visual features such as green space, building density, and infrastructure quality. Combined image-derived data with socioeconomic indicators and performed multivariate regression analysis to predict neighborhood-level eviction risk. Visualized model outputs in Tableau mapping risk patterns across U.S. regions and helping identify the five most vulnerable areas based on predicted risk scores. Achieved 92% model accuracy and developed reproducible workflows supporting further social and housing research.
+
+SKILLS
+
+Python, SQL, R, Stata, Git, Docker, Scikit-learn, TensorFlow, Keras, PyTorch, LangChain, HuggingFace Transformers, spaCy, NLTK, Pandas, ETL Pipelines, Statistical Analysis, PostgreSQL, MySQL, Selenium, AWS, Tableau, Power BI, Excel, Matplotlib, Seaborn, GitHub Copilot, NLP, LLMs, Machine Learning, Data Pipelines, Text Classification, Clustering, Predictive Modeling, GIS, Feature Extraction, Data Visualization, AI Model Development, Flask, FastAPI, ChromaDB, OpenAI API, RAG, Prompt Engineering, Vector Databases, Semantic Search, OpenAI Function Calling, Convolutional Neural Networks, Unsupervised Learning, Cluster Analysis, Model Context Protocol, AI Integration, REST APIs, Feature Engineering, Metadata Management.
+
+ABOUT
+
+Saketh is an AI and data science professional based in Morgantown, WV. He holds an MS in Computer Science from SUNY Albany and a BE in Computer Science from CBIT Hyderabad. His work sits at the intersection of NLP, machine learning, and applied research. He has hands-on experience building production-grade data pipelines, LLM-powered analysis workflows, RAG systems, and predictive models. He has Anthropic certifications in Model Context Protocol and AI Fluency. He presented research at the SSWR 2026 Annual Conference. He is currently looking for full-time roles in AI engineering, machine learning engineering, data science, NLP engineering, or AI solutions roles. He is open to relocating for the right opportunity.
