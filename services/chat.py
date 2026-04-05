@@ -33,6 +33,7 @@ def _build_prompt(query):
             f"Draw from what's in the context. "
             f"Stick to facts from the context. Don't say 'currently pursuing' if the context says completed. "
             f"Don't exaggerate or generalize. Use specific details from the context.\n\n"
+            f"Keep answers to 2-3 sentences for simple questions. Only go longer if someone asks for detail.\n\n"
             f"If something is genuinely not covered and you can't reasonably answer from the context, "
             f"say that's outside what you know and suggest they reach out directly. "
             f"Then use the record_unknown_question tool to log it. Don't make anything up.\n\n"
