@@ -2,15 +2,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const msgs = document.getElementById("msgs");
     const inp = document.getElementById("inp");
     const sendBtn = document.getElementById("send");
-    const starters = document.getElementById("starters");
 
     const persona = document.body.dataset.persona || "AI";
     const initials = persona.split(" ").map(w => w[0]).join("").toUpperCase().slice(0, 2);
 
     let history = [];
     let locked = false;
-
-    // ── dom helpers ─────────────────────────────────────────
 
     function scroll() {
         msgs.scrollTo({ top: msgs.scrollHeight, behavior: "smooth" });
@@ -55,7 +52,6 @@ document.addEventListener("DOMContentLoaded", () => {
         if (el) el.remove();
     }
 
-    // word-by-word reveal
     async function typeOut(text) {
         let row = addRow("bot", "");
         let bubble = row.querySelector(".bubble");
@@ -72,12 +68,9 @@ document.addEventListener("DOMContentLoaded", () => {
         return new Promise(r => setTimeout(r, ms));
     }
 
-    // ── api call ────────────────────────────────────────────
-
     async function send(text) {
         if (!text.trim() || locked) return;
 
-        starters.style.display = "none";
         addRow("user", text);
         history.push({ role: "user", content: text });
         inp.value = "";
@@ -112,19 +105,15 @@ document.addEventListener("DOMContentLoaded", () => {
         inp.focus();
     }
 
-    // ── greeting ────────────────────────────────────────────
-
     async function greet() {
         await wait(500);
         showTyping();
         await wait(1200);
         hideTyping();
 
-        let msg = `Hey! I'm ${persona}'s AI — ask me anything about skills, projects, or experience. What would you like to know?`;
+        let msg = `Hey! I'm ${persona}'s AI — ask me anything about skills, projects, or experience.`;
         await typeOut(msg);
     }
-
-    // ── events ──────────────────────────────────────────────
 
     sendBtn.addEventListener("click", () => send(inp.value));
 
@@ -137,10 +126,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     inp.addEventListener("input", () => {
         sendBtn.disabled = !inp.value.trim();
-    });
-
-    document.querySelectorAll(".pill").forEach(p => {
-        p.addEventListener("click", () => send(p.textContent));
     });
 
     greet();
