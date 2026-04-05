@@ -18,23 +18,9 @@ RESEARCH EXPERIENCE
 
 Research Assistant at University at Albany, SUNY School of Social Welfare, Albany, NY. Aug 2024 to Sept 2025.
 
-Worked on applied research that uses AI and NLP to understand housing stability, eviction and public-sector communication. A big part of the role was collecting and preparing large public datasets, including scraping government and policy websites and analyzing discussions from online forums.
+Led three concurrent research studies on U.S. housing instability, working at the intersection of AI, NLP, and social science. The role involved designing and building end-to-end data pipelines, applying large language models to analyze unstructured text at scale, and translating complex analyses into policy-relevant insights.
 
-Used large language models and machine learning as part of research pipelines to organize and analyze unstructured text at scale. This included prompt-structured extraction and summarization, embedding-based retrieval, and retrieval-augmented generation to keep model outputs grounded in source material. Also spent time checking model behavior and output quality to make sure results were consistent, interpretable and useful.
-
-Worked with different models across both frontier and open-source ecosystems and explored lightweight fine-tuning approaches for task-specific research needs. Beyond modeling, focused heavily on data quality, validation, and visualization, working closely with researchers to turn complex analyses into clear summaries, dashboards, and policy-relevant insights.
-
-Built an end-to-end NLP/ML measurement pipeline to quantify landlord discourse from large-scale unstructured data. Scraped, cleaned, and structured a Reddit corpus. Designed a multi-stage LLM classification framework using GPT-4, Llama, custom prompt schemas, and structured output parsing. Achieved 98% precision in location tagging and 90% accuracy in topic classification.
-
-Applied unsupervised ML on topic embeddings to identify thematic groupings. Conducted state-level frequency, temporal, and comparative analysis to surface regional variation in housing concerns. Presented findings at SSWR 2026 Annual Conference.
-
-Constructed a national-scale structured dataset from scratch by programmatically identifying official URLs for all U.S. counties, cities, and towns. Built a Selenium-based framework to inject policy-relevant keywords and capture results as MHTML for reproducible extraction.
-
-Designed a retrieval-augmented analysis workflow using semantic reranking to filter web content by relevance before passing to LLM for structured summarization. Performed comparative analysis across jurisdictions to identify patterns in policy language and enforcement approaches.
-
-Built a geospatial image pipeline using Google Street View API. Fine-tuned pretrained CNNs (ResNet-50) to classify urban features. Joined outputs with socio-economic data via multivariate and spatial regression to quantify eviction risk predictors. Visualized results through interactive Tableau dashboards.
-
-Led data collection, processing, and analysis across three concurrent studies on U.S. housing instability, integrating multi-modal data including social media, government websites, satellite imagery, census and administrative records.
+Worked across both frontier and open-source model ecosystems including GPT-4 and Llama. Built retrieval-augmented generation workflows, prompt-structured extraction pipelines, and embedding-based retrieval systems. Focused heavily on output quality validation, data integrity, and reproducibility. Collaborated closely with researchers to deliver findings as dashboards, structured datasets, and conference presentations. Presented findings at the SSWR 2026 Annual Conference.
 
 PROFESSIONAL EXPERIENCE
 
@@ -66,19 +52,31 @@ PROJECTS
 
 Project: AI Portfolio Chatbot
 
-Built a chatbot that works as an interactive portfolio where visitors can ask anything about Saketh's background and get real answers. Under the hood it runs a RAG pipeline. Resume and project docs get chunked and embedded using OpenAI's text-embedding-3-small model then stored in ChromaDB. When someone asks a question the system embeds their query finds the closest matching chunks via cosine similarity and feeds that context into GPT-4o-mini to generate a response. The bot only talks about things Saketh has actually done. The backend is FastAPI with SQLite tracking knowledge entries, conversation logs, visitor leads, and unanswered questions. There is a password-protected admin panel for uploading new documents, adding specific Q&A pairs, viewing what people are asking, and seeing who left their email. OpenAI function calling handles the lead capture and logs questions the bot could not answer. Pushover notifications send real-time alerts when someone drops their email or asks something the bot does not know. Deployed on Hugging Face Spaces. Tech stack includes Python, FastAPI, OpenAI API, ChromaDB, SQLite, RAG, Prompt Engineering, OpenAI Function Calling, HTML, CSS, JavaScript, Docker, Hugging Face.
+Built a chatbot that works as an interactive portfolio where visitors can ask anything about Saketh's background and get real answers. Under the hood it runs a RAG pipeline. Resume and project docs get chunked and embedded using OpenAI's text-embedding-3-small model then stored in ChromaDB. When someone asks a question the system embeds their query finds the closest matching chunks via cosine similarity and feeds that context into GPT-4o-mini to generate a response. The bot only talks about things Saketh has actually done. The backend is FastAPI with SQLite tracking knowledge entries, conversation logs, visitor leads, and unanswered questions. There is a password-protected admin panel for uploading new documents, adding specific Q&A pairs, viewing what people are asking, and seeing who left their email. OpenAI function calling handles the lead capture and logs questions the bot could not answer. Pushover notifications send real-time alerts when someone drops their email or asks something the bot does not know. Deployed on Hugging Face Spaces.
 
 Project: Using AI to Explore What Landlords Care About in Promoting Housing Stability
 
-Collected and analyzed millions of Reddit posts from landlord and tenant forums using the Pushshift API and custom Python scripts. Built an NLP pipeline with Large Language Models and Sentence-BERT embeddings to classify, cluster, and summarize discussion topics. Applied hierarchical and unsupervised clustering to group themes uncovering key patterns around rent increases, repairs, lease disputes, and eviction issues. Achieved 98% accuracy in geographic tagging and 90% precision in topic identification. Visualized results in Tableau dashboards highlighting regional housing trends and common landlord-tenant concerns across the U.S.
+Developed a large-scale NLP measurement pipeline to quantify landlord discourse across the U.S. rental market. Built a multi-stage LLM classification framework using GPT-4 and Llama with custom prompt schemas and structured output parsing to extract geographic signals and classify discussion topics from unstructured forum data. Achieved 98% precision in location extraction and 90% accuracy in topic classification, validated through human-in-the-loop review.
 
-Project: Automated Analysis of Local Government Websites Using AI
+Applied unsupervised machine learning on topic embeddings to surface thematic groupings across five major categories including eviction processes, lease management, and conflict resolution. Conducted state-level comparative and temporal analysis revealing how landlord concerns shift in response to policy changes — for example, eviction discourse spiked during the 2021 moratorium and was disproportionately concentrated in states with complex regulatory frameworks like New York.
 
-Engineered a scalable AI data pipeline to collect, process, and analyze public data from thousands of official U.S. city, county, and borough websites. Utilized the Google Custom Search API to identify and validate official domains followed by Selenium automation for dynamic web extraction. Applied Large Language Models and NLP techniques to classify, summarize, and structure extracted text transforming unstructured web content into a clean analyzable dataset. Developed ETL workflows and Tableau dashboards to visualize online policy patterns and transparency metrics across regions. Improved data completeness and consistency replacing manual crowdsourced scanning with a fully automated reproducible system.
+The research uncovered an underexplored finding: communication and conflict resolution emerged as a dominant theme, suggesting alignment between landlord and tenant goals that could inform preventive policy interventions. Findings were presented at the SSWR 2026 Annual Conference. This work demonstrates how AI-assisted qualitative analysis can surface actionable insights from large-scale unstructured data that traditional survey methods would miss.
+
+Project: Automated Analysis of Local Government Housing and Eviction Policy Across the U.S.
+
+Built an end-to-end data pipeline to construct the first nationwide structured dataset of local government housing policy content. Started with census-derived lists of every U.S. county, municipality, and borough. Used the Google Custom Search API to programmatically identify and validate official government websites for each jurisdiction, then built a Selenium-based automation framework to detect whether each site had a functional search engine.
+
+For sites with search capability, injected policy-relevant keywords — housing policy, eviction process, rental assistance, tenant rights — captured returned results as MHTML for reproducible extraction, then parsed and extracted the underlying documents and text content. For the analysis layer, implemented a retrieval-augmented generation workflow using GPT-4 with semantic reranking to filter extracted content by relevance before passing it to the LLM for structured summarization and policy comparison across jurisdictions.
+
+This created a nationally scoped, machine-readable dataset of how local governments communicate housing and eviction policy online — something that previously required manual review by research teams. The analysis phase is currently ongoing, examining differences in policy language, enforcement approaches, and transparency across states and municipalities.
 
 Project: Predictive Modeling and Visualization of Eviction Risk Patterns in U.S. Neighborhoods
 
-Analyzed Google Street View images to study neighborhood characteristics linked to housing instability. Built Convolutional Neural Network models in Python to extract visual features such as green space, building density, and infrastructure quality. Combined image-derived data with socioeconomic indicators and performed multivariate regression analysis to predict neighborhood-level eviction risk. Visualized model outputs in Tableau mapping risk patterns across U.S. regions and helping identify the five most vulnerable areas based on predicted risk scores. Achieved 92% model accuracy and developed reproducible workflows supporting further social and housing research.
+Built a geospatial computer vision pipeline to quantify neighborhood-level eviction risk across U.S. regions. Collected street-level imagery through the Google Street View API and fine-tuned pretrained CNNs (ResNet-50) to classify urban features including green space coverage, building density, infrastructure quality, and visual indicators of disinvestment.
+
+Joined image-derived feature vectors with socioeconomic data from census and administrative sources. Performed multivariate and spatial regression analysis to isolate which neighborhood characteristics were most predictive of housing instability. Achieved 92% model accuracy in predicting eviction risk at the neighborhood level.
+
+Visualized outputs through interactive Tableau dashboards that mapped risk patterns across regions, enabling targeted identification of the most vulnerable neighborhoods based on composite risk scores. The pipeline was designed to be reproducible and extensible for ongoing housing research.
 
 SKILLS
 
