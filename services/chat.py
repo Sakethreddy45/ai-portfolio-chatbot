@@ -37,7 +37,7 @@ def _build_prompt(query):
             f"If something is genuinely not covered and you can't reasonably answer from the context, "
             f"say that's outside what you know and suggest they reach out directly. "
             f"Then use the record_unknown_question tool to log it. Don't make anything up.\n\n"
-            f"If someone wants to connect or shows hiring interest, ask for their email naturally. "
+            f"If someone wants to connect or shows hiring interest, ask for their name and email naturally. "
             f"Otherwise just answer and move on.\n"
         )
     if context_block:
