@@ -2,12 +2,104 @@ document.addEventListener("DOMContentLoaded", () => {
     const msgs = document.getElementById("msgs");
     const inp = document.getElementById("inp");
     const sendBtn = document.getElementById("send");
+    const micBtn = document.getElementById("mic");
 
     const persona = document.body.dataset.persona || "AI";
     const initials = persona.split(" ").map(w => w[0]).join("").toUpperCase().slice(0, 2);
 
     let history = [];
     let locked = false;
+    let voiceMode = false;
+    let recognition = null;
+
+    // check if browser supports speech
+    const canListen = "webkitSpeechRecognition" in window || "SpeechRecognition" in window;
+    const canSpeak = "speechSynthesis" in window;
+
+    // set up speech recognition if available
+    if (canListen) {
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        recognition = new SpeechRecognition();
+        recognition.lang = "en-US";
+        recognition.continuous = false;
+        recognition.interimResults = false;
+
+        recognition.onresult = (e) => {
+            let transcript = e.results[0][0].transcript;
+            if (transcript.trim()) {
+                send(transcript);
+            }
+        };
+
+        recognition.onerror = (e) => {
+            console.error("speech error:", e.error);
+            if (e.error !== "no-speech") {
+                toggleVoice(false);
+            }
+        };
+
+        recognition.onend = () => {
+            // if voice mode still on and not locked (waiting for response), keep listening
+            if (voiceMode && !locked) {
+                startListening();
+            }
+        };
+    }
+
+    function startListening() {
+        if (!recognition) return;
+        try {
+            recognition.start();
+        } catch (e) {
+            // already started, ignore
+        }
+    }
+
+    function stopListening() {
+        if (!recognition) return;
+        try {
+            recognition.stop();
+        } catch (e) {
+            // not started, ignore
+        }
+    }
+
+    function speak(text) {
+        if (!canSpeak) return;
+        window.speechSynthesis.cancel();
+        let utterance = new SpeechSynthesisUtterance(text);
+        utterance.rate = 1.05;
+        utterance.pitch = 1;
+
+        // try to pick a natural sounding voice
+        let voices = window.speechSynthesis.getVoices();
+        let preferred = voices.find(v => v.name.includes("Google") && v.lang.startsWith("en"));
+        if (!preferred) preferred = voices.find(v => v.lang.startsWith("en"));
+        if (preferred) utterance.voice = preferred;
+
+        // resume listening after speaking finishes
+        utterance.onend = () => {
+            if (voiceMode && !locked) {
+                startListening();
+            }
+        };
+
+        window.speechSynthesis.speak(utterance);
+    }
+
+    function toggleVoice(forceState) {
+        voiceMode = forceState !== undefined ? forceState : !voiceMode;
+        micBtn.classList.toggle("active", voiceMode);
+
+        if (voiceMode) {
+            startListening();
+        } else {
+            stopListening();
+            window.speechSynthesis.cancel();
+        }
+    }
+
+    // ── dom helpers ─────────────────────────────────────────
 
     function scroll() {
         msgs.scrollTo({ top: msgs.scrollHeight, behavior: "smooth" });
@@ -68,8 +160,13 @@ document.addEventListener("DOMContentLoaded", () => {
         return new Promise(r => setTimeout(r, ms));
     }
 
+    // ── api call ────────────────────────────────────────────
+
     async function send(text) {
         if (!text.trim() || locked) return;
+
+        // stop listening while waiting for response
+        stopListening();
 
         addRow("user", text);
         history.push({ role: "user", content: text });
@@ -93,6 +190,11 @@ document.addEventListener("DOMContentLoaded", () => {
             hideTyping();
             await typeOut(data.reply);
             history.push({ role: "assistant", content: data.reply });
+
+            // read the reply out loud if voice mode is on
+            if (voiceMode) {
+                speak(data.reply);
+            }
         } catch (err) {
             hideTyping();
             addRow("bot", "Something went wrong — try again?");
@@ -102,8 +204,11 @@ document.addEventListener("DOMContentLoaded", () => {
         locked = false;
         inp.disabled = false;
         sendBtn.disabled = false;
-        inp.focus();
+
+        if (!voiceMode) inp.focus();
     }
+
+    // ── greeting ────────────────────────────────────────────
 
     async function greet() {
         await wait(500);
@@ -114,6 +219,8 @@ document.addEventListener("DOMContentLoaded", () => {
         let msg = `Hey! I'm ${persona}'s AI — ask me anything about skills, projects, or experience.`;
         await typeOut(msg);
     }
+
+    // ── events ──────────────────────────────────────────────
 
     sendBtn.addEventListener("click", () => send(inp.value));
 
@@ -127,6 +234,18 @@ document.addEventListener("DOMContentLoaded", () => {
     inp.addEventListener("input", () => {
         sendBtn.disabled = !inp.value.trim();
     });
+
+    if (micBtn && canListen) {
+        micBtn.addEventListener("click", () => toggleVoice());
+    } else if (micBtn && !canListen) {
+        micBtn.style.display = "none";
+    }
+
+    // voices sometimes load async, grab them early
+    if (canSpeak) {
+        window.speechSynthesis.getVoices();
+        window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
+    }
 
     greet();
 });
