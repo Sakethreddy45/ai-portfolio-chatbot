@@ -36,7 +36,7 @@ TOOL_DEFS = [
         "type": "function",
         "function": {
             "name": "record_user_details",
-            "description": "Record a visitor's email when they want to get in touch.",
+            "description": "Only use this when a visitor provides their email address. Do not call this tool unless you have an actual email address.",
             "parameters": {
                 "type": "object",
                 "properties": {
